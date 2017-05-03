@@ -11,7 +11,6 @@
             <div>允许公开发表并分享你的祝福<i class="fa fa-check-circle" aria-hidden="true"></i></div>
         </div>
     </div>
-
     <div>
     </div>
 </div>
@@ -61,8 +60,6 @@
         }
         
     }
-    
-
 }
 </style>
 <script>
