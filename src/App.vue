@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import '@/libs/font-size-adjust'
 export default {
-    name: 'app'
+    name: 'app',
+    mounted () {
+    }
 }
 </script>
 
