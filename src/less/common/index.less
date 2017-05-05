@@ -1,5 +1,24 @@
 // 设定根元素文字大小 根元素是html 不是body
 html { 
     font-size: 100px;
+}
+
+input, button {
+    outline: none;
 } 
 // 按照 320 宽度去做页面  如果 手机屏幕宽   就等比放大页面
+// 工具类
+.clear:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.hidden {
+    display: none !important;
+}
+.fl {
+    float: left !important;
+}
+.fr {
+    float: right !important;
+}

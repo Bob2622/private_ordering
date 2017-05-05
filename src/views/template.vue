@@ -6,7 +6,7 @@
             <img class="btn-picture" src="../assets/btn-picture.png" alt="">
             <img class="btn-my-pictures" src="../assets/btn-my-pictures.png" alt="">
         </div>
-        <div class="tmp3">
+        <div class="tmp1">
             <span class="text-to">To</span>
             <span class="text-recipient">秀秀</span>
             <span class="text-content">嫁给我一定是世界上第二幸福的人, 因为第一幸福的认识我!</span>

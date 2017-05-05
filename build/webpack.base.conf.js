@@ -22,7 +22,8 @@ module.exports = {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
-            '@': resolve('src')
+            '@': resolve('src'),
+            'less': resolve('src/less')
         }
     },
     module: {
@@ -47,6 +48,20 @@ module.exports = {
                 include: [resolve('src'), resolve('test')]
             },
             {
+                test: /\.less$/,
+                use: [ 
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { 
+                        loader: 'less-loader',
+                        options: {
+                            paths: [ path.resolve(__dirname, 'node_modules') ]
+                        }
+                     },
+                ],
+                include: [resolve('src'), resolve('test')]
+            },
+            {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
@@ -62,14 +77,6 @@ module.exports = {
                     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
             },
-            {
-                test: /\.woff(2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "url-loader?limit=10000&mimetype=application/font-woff" 
-            },
-            { 
-                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, 
-                loader: "file-loader" 
-            }
         ]
     }
 }

@@ -24,3 +24,12 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 ```
 [font-awesome](http://fontawesome.io/)
 ```
+
+
+#### TODO
+```
+1. less 引用路径设置根路径 
+2. 设置一个工具类的 less 文件 ( 放入commonjs-- 如果独立引用该模块 
+    需要引入common / 在模块中独立引用 工具类less 文件 )
+
+```
