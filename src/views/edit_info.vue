@@ -2,11 +2,14 @@
 <div class="edit-info clear">
     <h3>输入我的信息</h3>
     <div class="clear">
-        <input type="text" class="fl" placeholder="输入我的手机">
-        <button class="valication-code fr">发送短信验证码</button> <br>
+        <input type="text" class="fl" placeholder="输入我的手机" v-model="phoneNum">
+        <button class="valication-code fr" @click="sendMsg" v-show="sending == false">发送短信验证码</button>
+        <button class="valication-code fr" v-show="sending == true">重新发送({{ cntDown }})</button> <br>
     </div>
     <span class="tip fl">(隐私相关: 手机号将作为投放依据)</span>
-    <div><input type="text" class="valication-code-info  fl" placeholder="请输入短信验证码"></div>
+    <div>
+        <input type="text" class="valication-code-info  fl" placeholder="请输入短信验证码" v-model="secuCode">
+    </div>
     <button class="commit">确定</button>
 </div>
 </template>
@@ -33,6 +36,7 @@
         padding: 0;
         padding-left: 0.08rem;
         box-sizing: border-box;
+        color: inherit;
         &::-webkit-input-placeholder {
             color: #A0AAB2;
         }
@@ -52,7 +56,7 @@
         padding: 0;
     }
     .valication-code-info {
-        margin-top: 0.12rem;
+        margin-top: 0.20rem;
         width: 100%;
     }
     .commit {
@@ -66,24 +70,37 @@
         background: #FF6878;
     }
 }
-
 </style>
 <script>
 export default {
     name: 'editInfo',
-    props: {
-
-    },
     data: function () {
         return {
+            phoneNum: '',
+            secuCode: '',
 
+            sending: false, // 是否正在发送验证码
+            cntDown: 60,
         }
     },
     methods: {
-
+        sendMsg () {
+            this.sending = true
+            this.countDown()
+        },
+        countDown () {
+            let vue = this
+            let interval = setInterval(function(){
+                vue.cntDown--
+                if (vue.cntDown == 0) {
+                    clearInterval(interval)
+                    vue.sending = false
+                    vue.cntDown = 60
+                }
+            }, 1000)
+        }
     },
     mounted: function () {
-    
     }
 }
 </script>

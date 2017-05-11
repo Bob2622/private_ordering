@@ -1,22 +1,22 @@
 <template>
 <div class="template">
-    <div class="tmp">
+    <div class="tmp" id="test">
         <img src="../assets/tmp-bg-1.jpg" alt="">
         <div class="top-bg">
             <img class="btn-picture" src="../assets/btn-picture.png" alt="">
             <img class="btn-my-pictures" src="../assets/btn-my-pictures.png" alt="">
         </div>
-        <div class="tmp1">
+        <div :class="[ tmpId == 1 ? 'tmp1' : '', tmpId == 2 ? 'tmp2' : '', tmpId == 3 ? 'tmp3' : '' ]">
             <span class="text-to">To</span>
-            <span class="text-recipient">秀秀</span>
-            <span class="text-content">嫁给我一定是世界上第二幸福的人, 因为第一幸福的认识我!</span>
+            <span class="text-recipient">{{ to }}</span>
+            <span class="text-content">{{ msg }}</span>
             <div class="text-from-msgs">
                 <span class="text-by">By</span>
-                <span class="text-from">你的小帅帅</span>
+                <span class="text-from">{{ by }}</span>
             </div>
         </div>
     </div>
-    <div class="next">
+    <div class="next" @click="next">
         <button>下一步</button>
     </div>
 </div>
@@ -156,16 +156,20 @@
 <script>
 export default {
     name: 'template',
-    props: {
-
-    },
     data: function () {
         return {
-
+            to: this.$route.query.to,
+            by: this.$route.query.by,
+            msg: this.$route.query.msg,
+            tmpId: this.$route.query.tmpId
         }
     },
     methods: {
-
+        next () {
+            this.$router.push({
+                path: '/editInfo'
+            })
+        }
     },
     mounted: function () {
     }

@@ -108,6 +108,8 @@ export default {
         selectOption (value) {
             this.selectedOption = value
             this.isSelecting = false
+            this.$emit('input', value)
+            this.$emit('on-change', value)
         }
     },
     mounted: function () {

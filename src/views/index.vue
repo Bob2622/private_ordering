@@ -9,13 +9,17 @@
         <div class="protocal">
             <img class="phone" src="../assets/phone.png" alt="">
             <a href="">查看详情</a>
-            <div>我已阅读相关协议<i class="fa fa-check-circle" aria-hidden="true"></i></div>
-            <div>允许公开发表并分享你的祝福<i class="fa fa-check-circle" aria-hidden="true"></i></div>
+            <div :class="{ 'checked': acceptProtocal }" @click="acceptProtocal = !acceptProtocal">
+                我已阅读相关协议<i class="fa fa-check-circle" aria-hidden="true"></i>
+            </div>
+            <div :class="{ 'checked': acceptPublic }" @click="acceptPublic = !acceptPublic">
+                允许公开发表并分享你的祝福<i class="fa fa-check-circle" aria-hidden="true"></i>
+            </div>
         </div>
         <div class="phoneNum">
             <div class="phoneNum_ta">TA的小米手机号</div>
 
-            <input class="phone_user" type="text" placeholder="在此输入TA的手机号">
+            <input class="phone_user" type="text" v-model="toPhoneNum" placeholder="在此输入TA的手机号">
 
             <div class="phoneNum_warn">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
@@ -48,7 +52,7 @@
 
 
         <div class="next_step">
-            <input class="next_step_bnt" type="button" value="下一步">
+            <input class="next_step_bnt" type="button" value="下一步" @click="next">
         </div>
     </div>
 
@@ -70,6 +74,7 @@
             margin: 0;
         }
         .actity-detail {
+            text-align: left;
             font-size: 0.12rem;
             line-height: 1.5;
         }
@@ -95,6 +100,12 @@
             }
             > div {
                 margin-top: 0.10rem;
+            }
+            .fa {
+                margin-left: 0.04rem;
+            }
+            .checked .fa {
+                color: #fd6776;
             }
         }
         .phoneNum {
@@ -122,6 +133,7 @@
                 text-align: center;
                 font-size: 0.16rem;
                 margin-top: 0.18rem;
+                color: inherit;
                 background-color: #f8f9fa;
                 &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                   color: #A0AAB2;
@@ -246,10 +258,19 @@ export default {
     },
     data: function () {
         return {
-            a: 'a'
+            // 条件
+            acceptProtocal: true,
+            acceptPublic: false,
+            toPhoneNum: '', // 对方手机号
+            dates: [ '20170519', '20170520', '20170521' ],
         }
     },
     methods: {
+        next () {
+            this.$router.push({
+                path: '/chooseTemplate'
+            })
+        }
     },
     mounted: function () {
     }

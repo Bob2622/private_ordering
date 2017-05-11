@@ -18,13 +18,13 @@
                 </div>
             </div>
         </div>
-        <select-dialog :label="'TO'" :placeholder="'选择'" :options="options"></select-dialog>
-        <select-dialog :label="'BY'" :placeholder="'选择'" :options="options"></select-dialog>
-        <select-dialog :label="'祝福'" :placeholder="'选择'" :options="options"></select-dialog>
+        <select-dialog :label="'TO'" :placeholder="'选择'" :options="options" v-model="to"></select-dialog>
+        <select-dialog :label="'BY'" :placeholder="'选择'" :options="options" v-model="by"></select-dialog>
+        <select-dialog :label="'祝福'" :placeholder="'选择'" :options="options" v-model="msg"></select-dialog>
     </div>
     <div class="bottom">
-        <button>上一步</button>
-        <button>下一步</button>
+        <button @click="jumpTo('/')">上一步</button>
+        <button @click="next()">下一步</button> 
     </div>
 </div>
 </template>
@@ -114,10 +114,27 @@ export default {
                 '嫁给我你一定是世界上第二幸福的人, 因为第一幸福的人是我！',
             ],
             tmpId: 2,
+            to: '',
+            by: '',
+            msg: '', // 祝福语
         }
     },
     components: { selectDialog },
     methods: {
+        jumpTo (path) {
+            this.$router.push({ path: path })
+        },
+        next () {
+            this.$router.push({ 
+                path: 'template',
+                query: {
+                    to: this.to,
+                    by: this.by,
+                    msg: this.msg,
+                    tmpId: this.tmpId
+                }
+            })
+        }
     },
     mounted: function () {
     }
