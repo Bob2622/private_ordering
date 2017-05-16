@@ -4,6 +4,7 @@ import Index from '@/views/index'
 import Template from '@/views/template'
 import chooseTemplate from '@/views/choose_template'
 import editInfo from '@/views/edit_info'
+import tmp1 from '@/components/tmp1'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
             path: '/editInfo',
             name: 'editInfo',
             component: editInfo
+        },
+        {
+            path: '/tmp1',
+            name: 'tmp1',
+            component: tmp1
         },
     ]
 })

@@ -1,6 +1,6 @@
 <template>
 <div class="template">
-    <div class="tmp" id="test">
+    <div class="tmp">
         <img src="../assets/tmp-bg-1.jpg" alt="">
         <div class="top-bg">
             <img class="btn-picture" src="../assets/btn-picture.png" alt="">
@@ -29,7 +29,6 @@
     margin: 0 0.30rem;
     background: white;
     position: relative;
-    height: 4.62rem;
     .top-bg {
         height: 2.50rem;
         box-sizing: border-box;

@@ -1,2 +1,4 @@
 build/*.js
 config/*.js
+src/libs/html2canvas.js
+src/libs/canvas2image.js
