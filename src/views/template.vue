@@ -29,6 +29,7 @@
     margin: 0 0.30rem;
     background: white;
     position: relative;
+    height: 4.62rem;
     .top-bg {
         height: 2.50rem;
         box-sizing: border-box;

@@ -22,10 +22,9 @@
             <input class="phone_user" type="text" v-model="toPhoneNum" placeholder="在此输入TA的手机号">
 
             <div class="phoneNum_warn">
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            请确认对方为小米手机，非小米手机不能接受
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                请确认对方为小米手机，非小米手机不能接受
             </div>
-            
         </div>
           <div class="showDate">
             <div class="showDate_text">展现日期</div>
