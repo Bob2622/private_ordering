@@ -6,8 +6,11 @@
     <img class="img-bg" v-if="tmpId === 3" src="../assets/tmp-bg-3.jpg" alt="">
     <div class="tmp-content">
         <div class="top-bg">
-            <img class="btn-picture" src="../assets/btn-picture.png" alt="">
-            <img class="btn-my-pictures" src="../assets/btn-my-pictures.png" alt="">
+            <img class="btn-picture" src="../assets/btn-picture.png" alt="" v-if="file == ''">
+            <img class="btn-my-pictures" src="../assets/btn-my-pictures.png" alt=""   v-if="file == ''"
+                 @click="openCamera($event)">
+            <input type="file" name="image_file" accept="image/*" style="display: none;" @change="upImg($event)">
+            <img :src="file" alt="" class="custom" v-if="file !== ''">
         </div>
         <div :class="[ tmpId == 1 ? 'tmp1' : '', tmpId == 2 ? 'tmp2' : '', tmpId == 3 ? 'tmp3' : '' ]">
             <span class="text-to">To</span>
@@ -47,6 +50,10 @@
             background: #F8F9FA;
             box-sizing: border-box;
             border: dashed 1px @pink;
+            overflow: hidden;
+            .custom {
+                width: 100%;
+            }
             .btn-picture {
                 margin-right: 10%;
             }
@@ -207,10 +214,27 @@ export default {
     },
     data: function () {
         return {
+            file: ''
+        }
+    },
+    watch: {
+        file (newVal) {
+            console.debug(newVal)
         }
     },
     methods: {
-
+        openCamera (e) {
+            e.target.nextElementSibling.click()
+        },
+        upImg (e) {
+            let vm = this
+            let reader = new FileReader()
+            reader.readAsDataURL(e.target.files[0])
+            reader.onloadend = function () {
+                console.debug(reader.result)
+                vm.file = reader.result
+            }
+        }
     },
     mounted: function () {
     }
