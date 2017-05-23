@@ -20,29 +20,28 @@ Vue.use(fontAwesome)
 Vue.config.productionTip = false
 
 
+// setTimeout(function(){
+//     let demo = document.getElementById('test')
+//     let width = demo.offsetWidth
+//     let height = demo.offsetHeight
+//     let canvas = document.createElement('canvas')
+//     let scale = 6
+//     canvas.width = width * 6
+//     canvas.height = height * 6
+//     canvas.getContext('2d').scale(scale, scale)
+//     let opts = {
+//         scale: scale, // 添加的scale 参数
+//         canvas: canvas, //自定义 canvas
+//         logging: true, //日志开关
+//     }
 
-setTimeout(function(){
-    let demo = document.getElementById('test')
-    let width = demo.offsetWidth
-    let height = demo.offsetHeight
-    let canvas = document.createElement('canvas')
-    let scale = 6
-    canvas.width = width * 6
-    canvas.height = height * 6
-    canvas.getContext('2d').scale(scale, scale)
-    let opts = {
-        scale: scale, // 添加的scale 参数
-        canvas: canvas, //自定义 canvas
-        logging: true, //日志开关
-    }
-
-    html2canvas(demo, opts).then(function (canvas) {
-        let $img = canvas2image.convertToImage(canvas, canvas.width, canvas.height)
-        $img.setAttribute('width', '100%')
-        document.body.appendChild($img)
+//     html2canvas(demo, opts).then(function (canvas) {
+//         let $img = canvas2image.convertToImage(canvas, canvas.width, canvas.height)
+//         $img.setAttribute('width', '100%')
+//         document.body.appendChild($img)
         
-    })
-}, 2000)
+//     })
+// }, 2000)
 
 
 /* eslint-disable no-new */

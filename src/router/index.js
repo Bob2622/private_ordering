@@ -4,6 +4,8 @@ import Index from '@/views/index'
 import Template from '@/views/template'
 import chooseTemplate from '@/views/choose_template'
 import editInfo from '@/views/edit_info'
+import preview from '@/views/preview'
+import test from '@/views/test'
 import tmp1 from '@/components/tmp1'
 
 Vue.use(Router)
@@ -34,6 +36,16 @@ export default new Router({
             path: '/tmp1',
             name: 'tmp1',
             component: tmp1
+        },
+        {
+            path: '/preview',
+            name: 'preview',
+            component: preview
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: test
         },
     ]
 })

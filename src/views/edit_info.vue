@@ -8,7 +8,7 @@
     </div>
     <span class="tip fl">(隐私相关: 手机号将作为投放依据)</span>
     <div>
-        <input type="text" class="valication-code-info  fl" placeholder="请输入短信验证码" v-model="secuCode">
+        <input type="text" class="valication-code-info fl" placeholder="请输入短信验证码" v-model="secuCode">
     </div>
     <button class="commit">确定</button>
 </div>

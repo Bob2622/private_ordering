@@ -49,7 +49,6 @@
             <input class="share_bnt" type="button" value="分享">          
         </div>
 
-
         <div class="next_step">
             <input class="next_step_bnt" type="button" value="下一步" @click="next">
         </div>
