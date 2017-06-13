@@ -42,12 +42,12 @@
             </div>
         </div>
 
-        <div class="share">
+        <!-- <div class="share">
             <div class="share_text">分享</div>
             <div class="share_find">找不到小米手机用户？</div>
             <div class="share_love">分享链接，看看谁会对我表白。</div>
             <input class="share_bnt" type="button" value="分享">          
-        </div>
+        </div> -->
 
         <div class="next_step">
             <input class="next_step_bnt" type="button" value="下一步" @click="next">
@@ -266,7 +266,10 @@ export default {
     methods: {
         next () {
             this.$router.push({
-                path: '/chooseTemplate'
+                path: '/chooseTemplate',
+                query: {
+                    toPhoneNum: this.toPhoneNum
+                }
             })
         }
     },

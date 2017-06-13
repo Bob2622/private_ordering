@@ -1,168 +1,265 @@
+
 <template>
-<div class="template" id="test">
-    <img src="../assets/tmp-bg-1.jpg" alt="">
-    <div class="top-bg">
-        <img class="btn-picture" src="../assets/btn-picture.png" alt="">
-        <img class="btn-my-pictures" src="../assets/btn-my-pictures.png" alt="">
-    </div>
-    <div :class="[ tmpId == 1 ? 'tmp1' : '', tmpId == 2 ? 'tmp2' : '', tmpId == 3 ? 'tmp3' : '' ]">
-        <span class="text-to">To</span>
-        <span class="text-recipient">{{ to }}</span>
-        <span class="text-content">{{ msg }}</span>
-        <div class="text-from-msgs">
-            <span class="text-by">By</span>
-            <span class="text-from">{{ by }}</span>
+<div class="tmp">
+    <img class="img-bg" v-if="tmpId === 1" src="../assets/tmp-bg-1.jpg" alt="">
+    <img class="img-bg" v-if="tmpId === 2" src="../assets/tmp-bg-2.jpg" alt="">
+    <img class="img-bg" v-if="tmpId === 3" src="../assets/tmp-bg-3.jpg" alt="">
+    <div class="tmp-content">
+        <div :class="[ file == '' ? 'border-dashed' : '', 'top-bg']" @click="toggleBgPicker">
+            <img class="btn-picture" src="../assets/btn-picture.png" alt="" v-if="file == ''"
+                 @click="change">
+            <img class="btn-my-pictures" src="../assets/btn-my-pictures.png" alt=""   v-if="file == ''"
+                 @click="openCamera($event)">
+            <input type="file" name="image_file" accept="image/*" style="display: none;" @change="upImg($event)">
+            <img :src="file" alt="" class="custom" v-if="file !== ''">
+        </div>
+        <div :class="[ tmpId == 1 ? 'tmp1' : '', tmpId == 2 ? 'tmp2' : '', tmpId == 3 ? 'tmp3' : '' ]">
+            <span class="text-to">To</span>
+            <span class="text-recipient">{{ to }}</span>
+            <span class="text-content">{{ msg }}</span>
+            <div class="text-from-msgs">
+                <span class="text-by">By</span>
+                <span class="text-from">{{ by }}</span>
+            </div>
+            <div class="text-phone">{{ phoneNum }}</div>
         </div>
     </div>
+    <photo-will :show="photoWill" v-model="file"></photo-will>
 </div>
 </template>
-<style lang="less" scoped>
-.template {
-    background: white;
+<style lang="less">
+@pink: #FF6878;
+@grey: #ddd;
+.tmp {
     position: relative;
-    // height: 4.62rem;
-    .top-bg {
-        height: 2.80rem;
-        box-sizing: border-box;
-        border: dashed 0.01rem red;
-        z-index: 1;
-        position: relative;
-        background: #F4F5F6;
-        text-align: center;
-        .btn-picture, .btn-my-pictures {
-            width: 0.90rem;
-            margin-top: 0.85rem;
-        }
-        .btn-picture {
-            margin-right: 0.2rem;
-        }
+    .border-dashed {
+        border: dashed 1px @pink;
     }
-    > img {
+    .img-bg {
         width: 100%;
+        vertical-align: top;
+    }
+    .tmp-content {
         position: absolute;
         top: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
+        .top-bg {
+            height: 50%;
+            text-align: center;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+            background: #F8F9FA;
+            box-sizing: border-box;
+            
+            overflow: hidden;
+            .custom {
+                width: 100%;
+            }
+            .btn-picture {
+                margin-right: 10%;
+            }
+            .btn-picture, .btn-my-pictures {
+                width: 32%;
+            }
+        }
     }
 }
 .tmp1 {
+    position: relative;
+    height: 50%;
     font-size: 0.14rem;
-    position: relative;
-    z-index: 1;
-    padding: 0.40rem 0.30rem;
-    height: 2.1rem;
-    text-align: left;
-    position: relative;
-    .text-to, .text-content, .text-by, .text-recipient {
-        color: #FF6878;
+    color: @pink;
+    .text-to {
+        position: absolute;
+        top: 12%;
+        left: 10%;
+    }
+    .text-recipient {
+        position: absolute;
+        top: 12%;
+        left: 18%;
     }
     .text-content {
-        width: 0.80rem;
-        float: right;
-        line-height: 1.5;
-        text-align: left;
+        position: absolute;
+        display: block;
+        top: 12%;
+        left: 58%;
+        width: 30%;
         word-break: break-all;
+        text-align: left;
+        line-height: 1.5;
     }
-    .text-by {
+    .text-from-msgs {
         position: absolute;
-        bottom: 0.50rem;
-        right: 0.97rem;
+        bottom: 16%;
+        left: 58%;
+        .text-from {
+            color: @grey;
+            display: inline-block;
+            margin-left: 0.06rem;
+        }
     }
-    .text-from {
+    .text-phone {
+        color: @grey;
         position: absolute;
-        bottom: 0.50rem;
-        right: 0.30rem;
+        bottom: 5%;
+        right: 3%;
+        font-size: 0.12rem;
     }
 }
 .tmp2 {
-    font-size: 0.12rem;
     position: relative;
-    z-index: 1;
-    padding: 0.25rem 0.30rem;
-    height: 1.62rem;
-    background: #1F1F1F;
-    text-align: left;
-    .text-to, .text-recipient {
+    height: 50%;
+    font-size: 0.14rem;
+    color: @pink;
+    .text-to {
+        position: absolute;
+        top: 15%;
+        left: 16%;
         color: white;
+        font-style: italic;
     }
-    .text-content, .text-by, {
-        color: #FF6878;
+    .text-recipient {
+        position: absolute;
+        top: 15%;
+        left: 23%;
+        color: white;
     }
     .text-content {
         display: block;
-        margin-top: 0.15rem;
-        float: right;
-        line-height: 1.5;
+        padding: 25% 16% 0 16%;
+        word-break: break-all;
         text-align: left;
+        line-height: 1.5;
     }
     .text-from-msgs {
-        text-align: center;
         position: absolute;
-        bottom: 0.30rem;
-        text-align: center;
+        bottom: 16%;
         width: 100%;
-        margin-left: -0.3rem;
+        color: @grey;
+        .text-by {
+            margin-right: 0.06rem;
+            font-style: italic;
+        }
+    }
+    .text-phone {
+        color: @grey;
+        position: absolute;
+        bottom: 5%;
+        right: 3%;
+        font-size: 0.12rem;
     }
 }
 .tmp3 {
-    font-size: 0.12rem;
     position: relative;
-    z-index: 1;
-    padding: 0.25rem 0.30rem;
-    height: 1.62rem;
-    background: #FF6878;
-    text-align: center;
-    .text-to, .text-recipient, .text-content, .text-by, .text-from {
+    height: 50%;
+    font-size: 0.14rem;
+    color: white;
+    .text-to {
         color: white;
+        font-style: italic;
+        margin-top: 16%;
+        display: inline-block;
+        margin-right: 0.06rem;
+    }
+    .text-recipient {
     }
     .text-content {
+        // position: absolute;
         display: block;
-        margin-top: 0.15rem;
-        float: right;
-        line-height: 1.5;
+        padding: 8% 16% 0 16%;
+        word-break: break-all;
         text-align: left;
+        line-height: 1.5;
     }
     .text-from-msgs {
-        text-align: center;
         position: absolute;
-        bottom: 0.30rem;
-        text-align: center;
-        width: 100%;
-        margin-left: -0.3rem;
+        bottom: 16%;
+        right: 8%;
+        color: @grey;
+        .text-by {
+            margin-right: 0.06rem;
+            font-style: italic;
+        }
     }
-}
-.next {
-    background: white;
-    padding: 0.12rem 0.20rem 0.25rem 0.20rem;
-    margin-top: 0.16rem;
-    button {
-        background: #FF6878;
-        padding: 0.10rem 0;
-        border: solid 0.01rem transparent;
-        border-radius: 0.10rem;
-        width: 100%;
-        color: white;
-        font-weight: bolder;
-        font-size: 0.14rem;
-        outline: none;
+    .text-phone {
+        color: @grey;
+        position: absolute;
+        bottom: 5%;
+        right: 3%;
+        font-size: 0.12rem;
+        font-style: italic;
     }
 }
 </style>
 <script>
+import photoWill from 'components/photoWill'
 export default {
-    name: 'tmp1',
+    name: '',
+    props: {
+        tmpId: {
+            type: [ String, Number ],
+            default: -1
+        },
+        to: {
+            type: String,
+            default: ''
+        },
+        by: {
+            type: String,
+            default: ''
+        },
+        msg: {
+            type: String,
+            default: ''
+        },
+        phoneNum: {
+            type: [ String, Number ],
+            default: '18xxxx888'
+        },
+        value: {
+            type: String,
+            default: ''
+        }
+    },
     data: function () {
         return {
-            to: this.$route.query.to || 'vanny',
-            by: this.$route.query.by || 'lalal',
-            msg: this.$route.query.msg || '嫁给我你一定是世界上第二幸福的人, 因为第一幸福的人是我！',
-            tmpId: this.$route.query.tmpId || 1,
+            file: this.value,
+            photoWill: false,
+        }
+    },
+    components: { photoWill },
+    watch: {
+        file (newVal) {
+            this.$emit('input', newVal)
         }
     },
     methods: {
-        next () {
-            this.$router.push({
-                path: '/editInfo'
-            })
+        openCamera (e) {
+            e.target.nextElementSibling.click()
+        },
+        upImg (e) {
+            let vm = this
+            let reader = new FileReader()
+            reader.readAsDataURL(e.target.files[0])
+            reader.onloadend = function () {
+                console.debug(reader.result)
+                vm.file = reader.result
+            }
+        },
+        toggleBgPicker () {
+            this.file = ''
+        },
+        change () {
+            let vm = this
+            vm.photoWill = false
+            setTimeout(function(){
+                vm.photoWill = true
+            }, 10)
         }
     },
     mounted: function () {

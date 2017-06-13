@@ -1,6 +1,6 @@
 <template>
 <div class="template">
-    <div class="tmp">
+    <!-- <div class="tmp">
         <img src="../assets/tmp-bg-1.jpg" alt="">
         <div class="top-bg">
             <img class="btn-picture" src="../assets/btn-picture.png" alt="">
@@ -15,7 +15,8 @@
                 <span class="text-from">{{ by }}</span>
             </div>
         </div>
-    </div>
+    </div> -->
+    <tmp1 :to="to" :by="by" :msg="msg" :tmp-id="tmpId" :phone-num="phoneNum" v-model="imgBgUrl"></tmp1>
     <div class="next" @click="next">
         <button>下一步</button>
     </div>
@@ -24,136 +25,29 @@
 <style lang="less" scoped>
 .template {
     padding-top: 0.15rem;
-}
-.tmp {
-    margin: 0 0.30rem;
-    background: white;
-    position: relative;
-    height: 4.62rem;
-    .top-bg {
-        height: 2.50rem;
-        box-sizing: border-box;
-        border: dashed 0.01rem red;
-        z-index: 1;
-        position: relative;
-        background: #F4F5F6;
-        .btn-picture, .btn-my-pictures {
-            width: 0.90rem;
-            margin-top: 0.70rem;
+    .tmp {
+        margin: 0 0.30rem;
+    }
+    .next {
+        background: white;
+        padding: 0.12rem 0.20rem 0.25rem 0.20rem;
+        margin-top: 0.16rem;
+        button {
+            background: #FF6878;
+            padding: 0.10rem 0;
+            border: solid 0.01rem transparent;
+            border-radius: 0.10rem;
+            width: 100%;
+            color: white;
+            font-weight: bolder;
+            font-size: 0.14rem;
+            outline: none;
         }
-        .btn-picture {
-            margin-right: 0.2rem;
-        }
-    }
-    > img {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-}
-.tmp1 {
-    font-size: 0.12rem;
-    position: relative;
-    z-index: 1;
-    padding: 0.25rem 0.30rem;
-    height: 1.62rem;
-    text-align: left;
-    .text-to, .text-content, .text-by, .text-recipient {
-        color: #FF6878;
-    }
-    .text-content {
-        width: 0.80rem;
-        float: right;
-        line-height: 1.5;
-        text-align: left;
-    }
-    .text-by {
-        position: absolute;
-        bottom: 0.50rem;
-        right: 0.97rem;
-    }
-    .text-from {
-        position: absolute;
-        bottom: 0.50rem;
-        right: 0.30rem;
-    }
-}
-.tmp2 {
-    font-size: 0.12rem;
-    position: relative;
-    z-index: 1;
-    padding: 0.25rem 0.30rem;
-    height: 1.62rem;
-    background: #1F1F1F;
-    text-align: left;
-    .text-to, .text-recipient {
-        color: white;
-    }
-    .text-content, .text-by, {
-        color: #FF6878;
-    }
-    .text-content {
-        display: block;
-        margin-top: 0.15rem;
-        float: right;
-        line-height: 1.5;
-        text-align: left;
-    }
-    .text-from-msgs {
-        text-align: center;
-        position: absolute;
-        bottom: 0.30rem;
-        text-align: center;
-        width: 100%;
-        margin-left: -0.3rem;
-    }
-}
-.tmp3 {
-    font-size: 0.12rem;
-    position: relative;
-    z-index: 1;
-    padding: 0.25rem 0.30rem;
-    height: 1.62rem;
-    background: #FF6878;
-    text-align: center;
-    .text-to, .text-recipient, .text-content, .text-by, .text-from {
-        color: white;
-    }
-    .text-content {
-        display: block;
-        margin-top: 0.15rem;
-        float: right;
-        line-height: 1.5;
-        text-align: left;
-    }
-    .text-from-msgs {
-        text-align: center;
-        position: absolute;
-        bottom: 0.30rem;
-        text-align: center;
-        width: 100%;
-        margin-left: -0.3rem;
-    }
-}
-.next {
-    background: white;
-    padding: 0.12rem 0.20rem 0.25rem 0.20rem;
-    margin-top: 0.16rem;
-    button {
-        background: #FF6878;
-        padding: 0.10rem 0;
-        border: solid 0.01rem transparent;
-        border-radius: 0.10rem;
-        width: 100%;
-        color: white;
-        font-weight: bolder;
-        font-size: 0.14rem;
-        outline: none;
     }
 }
 </style>
 <script>
+import tmp1 from 'components/tmp1'
 export default {
     name: 'template',
     data: function () {
@@ -161,13 +55,24 @@ export default {
             to: this.$route.query.to,
             by: this.$route.query.by,
             msg: this.$route.query.msg,
-            tmpId: this.$route.query.tmpId
+            tmpId: this.$route.query.tmpId*1,
+            phoneNum: this.$route.query.phoneNum,
+            imgBgUrl: ''
         }
     },
+    components: { tmp1 },
     methods: {
         next () {
             this.$router.push({
-                path: '/editInfo'
+                path: '/editInfo',
+                query: {
+                    to: this.to,
+                    by: this.by,
+                    msg: this.msg,
+                    tmpId: this.tmpId,
+                    imgBgUrl: this.imgBgUrl,
+                    phoneNum: this.phoneNum,
+                }
             })
         }
     },

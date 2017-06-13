@@ -2,7 +2,7 @@
 <div class="edit-info clear">
     <h3>输入我的信息</h3>
     <div class="clear">
-        <input type="text" class="fl" placeholder="输入我的手机" v-model="phoneNum">
+        <input type="text" class="fl" placeholder="输入我的手机" v-model="myPhoneNum">
         <button class="valication-code fr" @click="sendMsg" v-show="sending == false">发送短信验证码</button>
         <button class="valication-code fr" v-show="sending == true">重新发送({{ cntDown }})</button> <br>
     </div>
@@ -10,7 +10,7 @@
     <div>
         <input type="text" class="valication-code-info fl" placeholder="请输入短信验证码" v-model="secuCode">
     </div>
-    <button class="commit">确定</button>
+    <button class="commit" @click="commit">确定</button>
 </div>
 </template>
 <style lang="less" scoped>
@@ -72,15 +72,23 @@
 }
 </style>
 <script>
+import Axios from 'axios'
 export default {
     name: 'editInfo',
     data: function () {
         return {
-            phoneNum: '',
+            myPhoneNum: '',
             secuCode: '',
 
             sending: false, // 是否正在发送验证码
             cntDown: 60,
+
+            to: this.$route.query.to,
+            by: this.$route.query.by,
+            msg: this.$route.query.msg,
+            tmpId: this.$route.query.tmpId,
+            imgBgUrl: this.$route.query.imgBgUrl,
+            phoneNum: this.$route.query.phoneNum,
         }
     },
     methods: {
@@ -98,6 +106,27 @@ export default {
                     vue.cntDown = 60
                 }
             }, 1000)
+        },
+        commit () {
+            // Axios({
+            //     url: '',
+            //     method: 'get',
+            //     data: { secuCode: this.secuCode }
+            // }).then(function(response){
+
+            // })
+            // 
+            this.$router.push({
+                path: '/preview',
+                query: {
+                    to: this.to,
+                    by: this.by,
+                    msg: this.msg,
+                    tmpId: this.tmpId,
+                    phoneNum: this.phoneNum,
+                    imgBgUrl: this.imgBgUrl,
+                }
+            })
         }
     },
     mounted: function () {

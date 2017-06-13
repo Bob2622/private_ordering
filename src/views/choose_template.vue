@@ -117,6 +117,7 @@ export default {
             to: '',
             by: '',
             msg: '', // 祝福语
+            toPhoneNum: this.$route.query.toPhoneNum
         }
     },
     components: { selectDialog },
@@ -131,7 +132,8 @@ export default {
                     to: this.to,
                     by: this.by,
                     msg: this.msg,
-                    tmpId: this.tmpId
+                    tmpId: this.tmpId,
+                    phoneNum: this.toPhoneNum
                 }
             })
         }
